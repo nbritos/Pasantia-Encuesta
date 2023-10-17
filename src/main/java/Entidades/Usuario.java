@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 public class Usuario {
 
     private long dni;
-    private Carrera idCarrera;
+    private long idCarrera;
 
     //CONSTRUCTOR, GETTER Y SETTER
     //constructor por default
@@ -19,7 +19,7 @@ public class Usuario {
         return dni;
     }
 
-    public Carrera getCarrera(){
+    public long getCarrera(){
         return idCarrera;
     }
 
@@ -28,7 +28,7 @@ public class Usuario {
         this.dni=paramDni;
     }
 
-    public void setCarrera(Carrera paramCarrera){
+    public void setCarrera(long paramCarrera){
         this.idCarrera=paramCarrera;
     }
 }

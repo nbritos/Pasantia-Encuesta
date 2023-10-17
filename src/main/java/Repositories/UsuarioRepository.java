@@ -9,11 +9,12 @@ import java.util.List;
 
 //chatgpt:
 public interface UsuarioRepository extends JpaRepository <Usuario,Long> {
+
     Usuario findByDni(long dni);
 
     Usuario findByNumeroDocumentoAndIdCarrera(String numeroDocumento, Long idCarrera);
-    //usando @Query
 
+    //usando @Query
     @Query("SELECT u FROM tabla_usuarios WHERE u.idCarrera = paramCarrera")
     List<Usuario> encontrarPorCarrera(@Param("paramCarrera") int idCarrera);
 }

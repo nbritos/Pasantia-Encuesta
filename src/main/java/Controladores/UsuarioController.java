@@ -2,28 +2,39 @@ package Controladores;
 
 import Entidades.Usuario;
 import Repositories.UsuarioRepository;
+import Servicios.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/usuario")
 public class UsuarioController {
+
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioService usuarioService;
 
-    //endpoint para post
-    @PostMapping("/login")
-    public String loginUsuario(@RequestBody Usuario usuario){
-        /*validaciones
-        usuario.dni
-        */
+    // Otros métodos del controlador...
 
-        //si existe
-        return "Bienvenid@";
+    // Endpoint para crear un nuevo usuario
+    @PostMapping("/crear")
+    public String crearUsuario(@RequestBody Usuario usuario) {
+        usuarioService.crearUsuario(usuario);
+        return "Usuario creado exitosamente";
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> obtenerUsuarioPorId(@PathVariable Long id) {
+        Usuario usuario = usuarioService.obtenerUsuarioPorDni(id);
+
+        if (usuario != null) {
+            // Devolver el usuario y un mensaje de ok
+            return ResponseEntity.ok("Usuario encontrado: " + usuario);
+        } else {
+            // Si no se encuentra el usuario, devolver un mensaje de error
+            return ResponseEntity.status(404).body("Usuario no encontrado");
+        }
     }
 }
