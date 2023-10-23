@@ -3,7 +3,7 @@ package Entidades;
 import javax.persistence.Entity;
 
 @Entity
-//entidades
+
 public class Usuario {
 
     private long dni;
