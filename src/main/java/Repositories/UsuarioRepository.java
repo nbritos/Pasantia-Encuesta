@@ -6,15 +6,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 //chatgpt:
 public interface UsuarioRepository extends JpaRepository <Usuario,Long> {
 
-    Usuario findByDni(long dni);
+    Optional<Usuario> findById(Long id);
 
     Usuario findByNumeroDocumentoAndIdCarrera(String numeroDocumento, Long idCarrera);
 
     //usando @Query
-    @Query("SELECT u FROM tabla_usuarios WHERE u.idCarrera = paramCarrera")
-    List<Usuario> encontrarPorCarrera(@Param("paramCarrera") int idCarrera);
+    @Query("SELECT u FROM Usuario u WHERE u.idCarrera = :paramCarrera")
+    List<Usuario> encontrarPorCarrera(@Param("paramCarrera") Long idCarrera);
+
 }
