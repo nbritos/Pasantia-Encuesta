@@ -1,11 +1,17 @@
 package com.example.demo.Entidades;
 
 import javax.persistence.Entity;
-
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
 @Entity
 public class Pregunta {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String textoPregunta;
+    @ManyToOne
     private Encuesta idEncuesta;
 
     //CONSTRUCTOR, GETTER Y SETTER
