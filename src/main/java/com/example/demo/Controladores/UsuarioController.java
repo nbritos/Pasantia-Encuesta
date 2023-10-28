@@ -1,7 +1,7 @@
-package Controladores;
+package com.example.demo.Controladores;
 
-import Entidades.Usuario;
-import Servicios.UsuarioService;
+import com.example.demo.Entidades.Usuario;
+import com.example.demo.Servicios.UsuarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
