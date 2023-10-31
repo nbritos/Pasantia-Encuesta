@@ -28,7 +28,7 @@ public class UsuarioController {
     // Endpoint para crear un nuevo usuario
     @PostMapping("/crear")
     public String crearUsuario(@RequestBody Usuario usuario) {
-        usuarioService.crearUsuario(usuario);
+        usuarioService.insertarUsuario(usuario);
         logger.info("log: Usuario creado.");
         logger.error("log: Ocurrió un error al crear usuario.");
         return "Usuario creado exitosamente";

@@ -11,8 +11,12 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
 
-    @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    public UsuarioService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
 
     public Optional<Usuario> obtenerUsuarioPorDocumento(String documento) {
         return usuarioRepository.findByDocumento(documento);
@@ -21,8 +25,7 @@ public class UsuarioService {
         return usuarioRepository.findByNumeroDocumentoAndIdCarrera(numeroDocumento, idCarrera);
     }*/
 
-    @Transactional
-    public void crearUsuario(Usuario usuario) {
+    public void insertarUsuario(Usuario usuario) {
         usuarioRepository.save(usuario);
     }
 
