@@ -7,31 +7,30 @@ import javax.persistence.GenerationType;
 @Entity
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String documento;
     private long idCarrera;
 
-    //CONSTRUCTOR, GETTER Y SETTER
-    //constructor por default
-    public Usuario(){
+    // CONSTRUCTOR, GETTER Y SETTER
 
+    // Constructor por default
+    public Usuario() {
     }
 
-    //Getter
-    public String getDni(){
+    // Getter
+    public String getDocumento() {
         return documento;
     }
 
-    public long getCarrera(){
+    public long getIdCarrera() {
         return idCarrera;
     }
 
-    //Setter
-    public void setDni(String paramDni){
-        this.documento=paramDni;
+    // Setter
+    public void setDocumento(String paramDocumento) {
+        this.documento = paramDocumento;
     }
 
-    public void setCarrera(long paramCarrera){
-        this.idCarrera=paramCarrera;
+    public void setIdCarrera(long paramIdCarrera) {
+        this.idCarrera = paramIdCarrera;
     }
 }

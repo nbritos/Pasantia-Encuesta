@@ -23,17 +23,21 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    // Otros métodos del controlador...
 
     // Endpoint para crear un nuevo usuario
     @PostMapping("/crear")
-    public String crearUsuario(@RequestBody Usuario usuario) {
-        usuarioService.insertarUsuario(usuario);
-        logger.info("log: Usuario creado.");
-        logger.error("log: Ocurrió un error al crear usuario.");
-        return "Usuario creado exitosamente";
+    public ResponseEntity<String> crearUsuario(@RequestBody Usuario usuario) {
+        try {
+            usuarioService.insertarUsuario(usuario);
+            logger.info("Usuario creado exitosamente.");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Usuario creado exitosamente");
+        } catch (Exception e) {
+            logger.error("Ocurrió un error al crear usuario: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error al crear usuario.");
+        }
     }
 
+    // Endpoint para traer un usuario
     @GetMapping("/documento/{documento}")
     public ResponseEntity<?> obtenerUsuarioPorDocumento(@PathVariable String documento) {
         Optional<Usuario> usuario = usuarioService.obtenerUsuarioPorDocumento(documento);
@@ -44,4 +48,7 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado para el documento: " + documento);
         }
     }
+
+    // Otros métodos del controlador...
+
 }
