@@ -1,10 +1,9 @@
 package com.example.demo.Entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Pregunta {
     @Id
@@ -12,38 +11,39 @@ public class Pregunta {
     private long id;
     private String textoPregunta;
     @ManyToOne
-    private Encuesta idEncuesta;
+    @JoinColumn(name = "encuesta_id")
+    private Encuesta encuesta;
 
-    //CONSTRUCTOR, GETTER Y SETTER
-    //constructor por default
+    @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL)
+    private List<Respuesta> respuestas = new ArrayList<>();
 
+    //CONSTRUCTOR,
     public Pregunta(){
-
     }
 
-    //Getter
+    //Getters
     public Long getId(){
         return id;
     };
-
     public String getTextoPregunta(){
         return textoPregunta;
     }
-
     public Encuesta getEncuesta(){
-        return idEncuesta;
+        return encuesta;
+    }
+    public List<Respuesta> getRespuestas() {
+        return respuestas;
     }
 
-    //Setter
 
+    //Setters
     public void setId(long paramId){
         this.id=paramId;
     }
     public void setTextoPregunta(String paramTexto){
         this.textoPregunta=paramTexto;
     }
-
     public void setIdEncuesta(long idEncuesta){
-        this.idEncuesta.setId(idEncuesta);
+        this.encuesta.setId(idEncuesta);
     }
 }

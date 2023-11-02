@@ -1,49 +1,53 @@
 package com.example.demo.Entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Encuesta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String titulo;
     private Date fecha;
 
+    @OneToMany(mappedBy = "encuesta", cascade = CascadeType.ALL)
+    private List<Pregunta> preguntas = new ArrayList<>();
 
-    //CONSTRUCTOR, GETTER Y SETTER
-    //constructor por default
+    //CONSTRUCTOR
     public Encuesta(){
-
     }
 
     //Getter
     public Long getId(){
         return id;
     };
-
     public String getTitulo(){
         return titulo;
     }
-
     public Date getFecha() {
         return fecha;
     }
+    public List<Pregunta> getPreguntas() {
+        return preguntas;
+    }
+
+
 
     //Setter
     public void setId(long paramId){
         this.id=paramId;
     }
-
     public void setTitulo(String paramTitulo){
         this.titulo=paramTitulo;
     }
-
     public void setFecha(Date paramFecha){
         this.fecha=paramFecha;
     }
+    public void setPreguntas(List<Pregunta> preguntas) {
+        this.preguntas = preguntas;
+    }
 }
+
